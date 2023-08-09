@@ -1,7 +1,8 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Registration from './components/Registration/Registration';
-
+import Register from './components/Registration/Register';
+import "./assets/css/style.css";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
           <Route path="/user" element={<User />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login />} /> */}
-          <Route path="/registration" element={<Registration />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </div>
     </BrowserRouter>
