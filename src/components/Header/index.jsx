@@ -1,12 +1,3 @@
-// import React from "react";
-
-// const Header = () => {
-//   return(
-//     <div>This is Header</div>
-//   );
-// }
-
-// export default Header;
 import React, { useMemo, useState } from "react";
 import { headerStyle } from "./style";
 import { AppBar, Button, List, ListItem, TextField } from "@material-ui/core";
@@ -15,13 +6,17 @@ import siteLogo from "../../assets/images/site-logo.svg";
 import { RoutePaths } from "../../utils/enum";
 import shared from "../../utils/shared";
 import cartIcon from "../../assets/images/cart.png";
-import bookService from "../../services/book.service";
+import bookService from "../../service/book.service";
 import searchIcon from "../../assets/images/search.png";
+import { useAuthContext } from "../../context/auth";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+// import { useCartContext } from "../../context/cart";
 
-const Header = () => {
+export const Header = () => {
   const classes = headerStyle();
-  //   const authContext = useAuthContext();
-  //   const cartContext = useCartContext();
+  const authContext = useAuthContext();
+  // const cartContext = useCartContext();
   // const [open, setOpen] = useState(false);
   const open = false;
   const [query, setquery] = useState("");
@@ -30,10 +25,10 @@ const Header = () => {
 
   const items = useMemo(() => {
     return shared.NavigationItems;
-    // return shared.NavigationItems.filter(
-    //   (item) =>
-    //     !item.access.length || item.access.includes(authContext.user.roleId)
-    // );
+    return shared.NavigationItems.filter(
+      (item) =>
+        !item.access.length || item.access.includes(authContext.user.roleId)
+    );
   }, []);
 
   const openMenu = () => {
@@ -49,6 +44,11 @@ const Header = () => {
     document.body.classList.add("search-results-open");
     searchBook();
     setOpenSearchResult(true);
+  };
+
+  const logOut = () => {
+    authContext.signOut();
+    // cartContext.emptyCart();
   };
 
   //   const addToCart = (book) => {
@@ -70,10 +70,10 @@ const Header = () => {
   return (
     <div className={classes.headerWrapper}>
       <AppBar className="site-header" id="header" position="static">
-        {/* <div
+        <div
           className="top-header"
           style={{ display: open ? "none" : "block" }}
-        ></div> */}
+        ></div>
         <div className="bottom-header">
           <div className="container">
             <div className="header-wrapper">
@@ -85,7 +85,7 @@ const Header = () => {
               <div className="nav-wrapper">
                 <div className="top-right-bar">
                   <List className="top-nav-bar">
-                    {/* {!authContext.user.id && ( */}
+                    {!authContext.user.id && (
                     <>
                       <ListItem>
                         <NavLink to={RoutePaths.Login} title="Login">
@@ -98,7 +98,7 @@ const Header = () => {
                         </Link>
                       </ListItem>
                     </>
-                    {/* )} */}
+                    )} 
                     {items.map((item, index) => (
                       <ListItem key={index}>
                         <Link to={item.route} title={item.name}>
@@ -111,7 +111,7 @@ const Header = () => {
                     <ListItem className="cart-link">
                       <Link to="/cart" title="Cart">
                         <img src={cartIcon} alt="cart.png" />
-                        <span>{0}</span>
+                        {/* <span>{0}</span> */}
                         Cart
                       </Link>
                     </ListItem>
@@ -120,13 +120,13 @@ const Header = () => {
                     </ListItem>
                   </List>
 
-                  {/* {false && (
+                  {authContext.user.id && (
                     <List className="right">
                       <Button onClick={() => logOut()} variant="outlined">
                         Log out
                       </Button>
                     </List>
-                  )} */}
+                  )}
                 </div>
               </div>
             </div>
@@ -209,5 +209,3 @@ const Header = () => {
     </div>
   );
 };
-
-export default Header;

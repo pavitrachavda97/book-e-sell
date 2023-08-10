@@ -10,13 +10,13 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Formik } from "formik";
-import ValidationErrorMessage from "./ValidationErrorMessage";
+import ValidationErrorMessage from "../../components/ValidationErrorMessage";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import authService from "../../services/auth.service";
+import authService from "../../service/auth.service";
 import { toast } from "react-toastify";
 
-export const Index = () => {
+export const Login = () => {
   const navigate = useNavigate();
 
   const initialValues = {

@@ -1,7 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import flagImage from "../assets/images/flag-dropdown.png";
 import { colors } from "../constant/constant";
-
 const materialCommonStyles = makeStyles((theme) => ({
   customSelect: {
     "& .MuiSvgIcon-root": {

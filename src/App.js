@@ -7,8 +7,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter } from "react-router-dom";
 import { MainNavigation } from "./components/MainNavigation";
 import loader from "../src/assets/images/loader.gif";
-import Footer from "./components/Footer/Footer";
-import Header from "./components/Header/Header";
+import { Footer } from "./components/footer";
+import { Header } from "./components/header";
 
 const App = () => {
   return (

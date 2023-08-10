@@ -1,19 +1,9 @@
-// import React from "react";
-
-// const Footer = () => {
-//     return (
-//         <div>This is footer</div>
-//     );
-// }
-
-// export default Footer;
-
 import React from "react";
 import { footerStyle } from "./style";
 import { Link } from "react-router-dom";
 import siteLogo from "../../assets/images/site-logo.svg";
 
-const Footer = () => {
+export const Footer = () => {
   const classes = footerStyle();
 
   return (
@@ -37,5 +27,3 @@ const Footer = () => {
     </div>
   );
 };
-
-export default Footer;
